@@ -16,9 +16,8 @@ framework:
             # sync: 'sync://'
 
         routing:
-            Symfony\Component\Mailer\Messenger\SendEmailMessage: async
-            Symfony\Component\Notifier\Message\ChatMessage: async
-            Symfony\Component\Notifier\Message\SmsMessage: async
+            App\Message\MoveToS3Storage\MoveToS3StorageMessage: async
+            App\Message\S3DeleteFile\S3DeleteFileMessage: async
 
             # Route your messages to the transports
             # 'App\Message\YourMessage': async

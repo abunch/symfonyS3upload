@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <span>TOTAL FILES: {{ data.files|length }}</span>
+    <a href="{{ path('app_file_deleteall') }}" class="btn btn-sm btn-primary float-end ms-2">Delete Everything</a>
+    <a href="{{ path('app_s3upload_uploadform') }}" class="btn btn-sm btn-primary float-end ms-2">Upload</a>
+    <table class="table table-condensed table-striped">
+        <thead>
+        <tr>
+            <td>Date Uploaded</td>
+            <td>File Name</td>
+            <td>File Size</td>
+            <td></td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for f in data.files %}
+            <tr>
+                <td>{{ f.uploaded|date("Y-m-d H:i:s") }}</td>
+                <td>{{ f.filename }}.{{ f.extension }}</td>
+                <td>{{ f.size|number_format }}</td>
+                <td>
+                    <a href="{{ path('app_file_delete', {'upload': f.id}) }}" class="btn btn-sm btn-primary">X</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

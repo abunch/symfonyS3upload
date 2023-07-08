@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <a href="{{ path('app_file_list') }}" class="btn btn-sm btn-primary float-end">File List</a>
+    <form action="{{ path('dropzone_upload_controller') }}"
+          class="dropzone"
+          id="my-awesome-dropzone"></form>
+{% endblock %}
