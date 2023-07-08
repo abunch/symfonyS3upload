@@ -37,6 +37,8 @@ class MoveToS3StorageHandler implements MessageHandlerInterface
             $this->logger->critical('Failed to save file to S3', ['fielanme' => $event->destination]);
         }
 
+        unlink($event->source);
+
     }
 
 }
