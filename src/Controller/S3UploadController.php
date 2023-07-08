@@ -41,13 +41,16 @@ class S3UploadController extends AbstractController
     ) {
         /** @var UploadedFile $file */
         foreach ($request->files->all() as $file) {
-            $md5File = md5_file($file->getRealPath());
-            $upload  = new Upload();
+            $md5File   = md5_file($file->getRealPath());
+            $dirInfo   = pathinfo($file->getClientOriginalName());
+            $filename  = $dirInfo['filename'];
+            $extension = $dirInfo['extension'];
+            $upload    = new Upload();
             $upload->setSize($file->getSize())
                 ->setMimeType($file->getClientMimeType())
                 ->setMd5Hash($md5File)
-                ->setFilename($file->getClientOriginalName())
-                ->setExtension($file->getClientOriginalExtension());
+                ->setFilename($filename)
+                ->setExtension($extension);
             $this->entityManager->persist($upload);
             $this->entityManager->flush();
             if ($this->fileMoverService->moveToTemp($file->getRealPath(), $upload->getId())) {

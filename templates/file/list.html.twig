@@ -15,12 +15,16 @@
         </thead>
         <tbody>
         {% for f in data.files %}
-            <tr>
+            <tr
+                    style="cursor:pointer;"
+                    onclick="if (event.target.tagName === 'TD') {window.open('{{ path('app_file_download', {'upload': f.id}) }}','_blank');}"
+            >
                 <td>{{ f.uploaded|date("Y-m-d H:i:s") }}</td>
                 <td>{{ f.filename }}.{{ f.extension }}</td>
                 <td>{{ f.size|number_format }}</td>
                 <td>
-                    <a href="{{ path('app_file_delete', {'upload': f.id}) }}" class="btn btn-sm btn-primary">X</a>
+                    <a href="{{ path('app_file_save', {'upload': f.id}) }}" class="btn btn-sm btn-success ms-2"><i class="bi bi-cloud-download"></i></a>
+                    <a href="{{ path('app_file_delete', {'upload': f.id}) }}" class="btn btn-sm btn-danger ms-2"><i class="bi bi-trash"></i></a>
                 </td>
             </tr>
         {% endfor %}
