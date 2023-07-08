@@ -19,5 +19,5 @@ Dropzone: https://docs.dropzone.dev/
 Notes:
 
 - This project needs more error handling as most of these actions are fire and forget so if something fails to happen it should be tracked and re-attempted or logged or rolled back to a "known-good" state.
-- Need to add download/streaming of files from s3 back to the user
+- ~~Need to add download/streaming of files from s3 back to the user~~
 
