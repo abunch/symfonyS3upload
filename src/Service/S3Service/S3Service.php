@@ -52,6 +52,15 @@ class S3Service
         return $this->client->download($this->s3Bucket, $filename)->getContentAsResource();
     }
 
+    public function getUrl(string $filename, int $timeout = 3600): string
+    {
+        return $this->client->getPresignedUrl(
+            $this->s3Bucket,
+            $filename,
+            new \DateTimeImmutable("now +" . $timeout . " seconds")
+        );
+    }
+
     public function save(string $filename, $contents): bool
     {
         try {
